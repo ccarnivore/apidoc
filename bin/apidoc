@@ -28,7 +28,9 @@ var argv = cmd
 
     .option('-c, --config <config>', 'Path to directory containing config file (apidoc.json).', './')
 
-    .option('--json-schema-path <json-schema-path>', 'Path to blisstribute json schema files.', collect, [])
+    .option('--json-schema-path <json-schema-path>', 'Path to blisstribute json schema files.', './')
+
+    .option('--zip', 'Additionally creates a zip file with output contents.', false)
 
     .option('--definitions', 'Include definitions file rather than copying definitions.', false)
 
@@ -100,6 +102,7 @@ var options = {
     includeFilters: argv.fileFilters.length ? argv.fileFilters : ['.*\\.(clj|cls|coffee|cpp|cs|dart|erl|exs?|go|groovy|ino?|java|js|jsx|kt|litcoffee|lua|p|php?|pl|pm|py|rb|scala|ts|vue)$'],
     src           : argv.input.length ? argv.input : ['./'],
     dest          : argv.output,
+    zip           : argv.zip,
     template      : argv.template,
     config        : argv.config,
     jsonSchemaPath: argv.jsonSchemaPath,

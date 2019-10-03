@@ -28,6 +28,8 @@ var argv = cmd
 
     .option('-c, --config <config>', 'Path to directory containing config file (apidoc.json).', './')
 
+    .option('--json-schema-path <json-schema-path>', 'Path to blisstribute json schema files.', collect, [])
+
     .option('--definitions', 'Include definitions file rather than copying definitions.', false)
 
     .option('-p, --private', 'Include private APIs in output.', false)
@@ -100,6 +102,7 @@ var options = {
     dest          : argv.output,
     template      : argv.template,
     config        : argv.config,
+    jsonSchemaPath: argv.jsonSchemaPath,
     apiprivate    : argv.private,
     verbose       : argv.verbose,
     debug         : argv.debug,

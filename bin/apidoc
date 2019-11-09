@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 'use strict';
 
 /*
@@ -11,11 +10,16 @@
  * Licensed under the MIT license.
  */
 
-var path   = require('path');
-var cmd    = require('commander');
-var apidoc = require('../lib/index');
+var path        = require('path');
+var cmd         = require('commander');
+var apidoc      = require('../lib/index');
+var fs          = require('fs-extra');
+var apidocPath  = path.join(__dirname, '../');
+var json        = JSON.parse( fs.readFileSync(apidocPath + 'package.json', 'utf8') );
 
 var argv = cmd
+    .version(json.version)
+
     .option('-f --file-filters <file-filters>', 'RegEx-Filter to select files that should be parsed (multiple -f can be used).', collect, [])
 
     .option('-e, --exclude-filters <exclude-filters>', 'RegEx-Filter to select files / dirs that should not be parsed (many -e can be used).', collect, [])
@@ -122,7 +126,6 @@ var options = {
     encoding      : argv.encoding,
     copyDefinitions: !argv.definitions,
 };
-
 if (apidoc.createDoc(options) === false) {
   process.exit(1);
 }
